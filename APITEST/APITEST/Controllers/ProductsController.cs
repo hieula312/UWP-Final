@@ -38,6 +38,10 @@ namespace APITEST.Controllers
             GetList();
             if (products.Count > 0)
             {
+                if (id < 0 || id > products.Count)
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Index from 1-5");
+                }
                 var product = products.Where(p => p.Id == id);
                 return Request.CreateResponse(HttpStatusCode.OK, product.AsEnumerable());
             }
@@ -67,6 +71,10 @@ namespace APITEST.Controllers
             GetList();
             if (products.Count > 0)
             {
+                if (id < 0 || id > products.Count)
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Index from 1-5");
+                }
                 var product = products.Where(p => p.Id == id);
                 products.Remove(product as Product);
                 return Request.CreateResponse(HttpStatusCode.OK, products.AsEnumerable());
